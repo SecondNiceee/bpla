@@ -17,19 +17,19 @@
       --bg-primary: #f8fafc;
       --bg-secondary: #f1f5f9;
       --bg-card: #ffffff;
-      /* Заменяю голубые цвета на зеленые */
-      --bg-light: #dcfce7;
+      /* Голубая цветовая схема */
+      --bg-light: #e0f2fe;
       --text-primary: #0f172a;
       --text-secondary: #64748b;
       --text-dark: #0f172a;
-      --accent: #15803d;
-      --accent-light: #22c55e;
+      --accent: #0284c7;
+      --accent-light: #0ea5e9;
       --border: rgba(15,23,42,0.1);
       --radius: 16px;
       --radius-sm: 8px;
       --maxw: 1200px;
-      --primary: #15803d;
-      --primary-light: #22c55e;
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -40,6 +40,54 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* Enhanced fade-in animations with different directions */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-in-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Staggered delays for child elements */
+    .fade-in[data-delay="1"], .fade-in-left[data-delay="1"], .fade-in-right[data-delay="1"], .fade-in-scale[data-delay="1"] { transition-delay: 0.1s; }
+    .fade-in[data-delay="2"], .fade-in-left[data-delay="2"], .fade-in-right[data-delay="2"], .fade-in-scale[data-delay="2"] { transition-delay: 0.2s; }
+    .fade-in[data-delay="3"], .fade-in-left[data-delay="3"], .fade-in-right[data-delay="3"], .fade-in-scale[data-delay="3"] { transition-delay: 0.3s; }
+    .fade-in[data-delay="4"], .fade-in-left[data-delay="4"], .fade-in-right[data-delay="4"], .fade-in-scale[data-delay="4"] { transition-delay: 0.4s; }
+    .fade-in[data-delay="5"], .fade-in-left[data-delay="5"], .fade-in-right[data-delay="5"], .fade-in-scale[data-delay="5"] { transition-delay: 0.5s; }
 
     /* Navigation */
     .nav {
@@ -156,7 +204,7 @@
     .hero-badge-dot {
       width: 6px;
       height: 6px;
-      background: #22c55e;
+      background: #0ea5e9;
       border-radius: 50%;
     }
     .hero-title {
@@ -501,7 +549,7 @@
     .risk-check svg {
       width: 14px;
       height: 14px;
-      color: #22c55e;
+      color: #0ea5e9;
     }
 
     /* Advantages Section */
@@ -541,159 +589,12 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
     .cta-buttons .btn-secondary {
-      border-color: rgba(255,255,255,0.3);
+      border-color: rgba(255, 255, 255, 0.3);
       color: #ffffff;
     }
     .cta-buttons .btn-secondary:hover {
       background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.5);
-    }
-
-    /* Pricing Section */
-    .section {
-      padding: 60px 40px;
-    }
-    .section-container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 60px;
-    }
-    .section-label {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .section-light .section-label { color: var(--accent); }
-    .section-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-    }
-    .section-subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-    .section-light .section-subtitle { color: var(--text-secondary); }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-    .pricing-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    }
-    .pricing-type {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-    .pricing-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-    }
-    .pricing-value {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--accent);
-    }
-    .pricing-period {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Risks Section */
-    .section {
-      padding: 60px 40px;
-    }
-    .section-container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 60px;
-    }
-    .section-label {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .section-light .section-label { color: var(--accent); }
-    .section-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-    }
-    .section-subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-    .section-light .section-subtitle { color: var(--text-secondary); }
-    .risks-list {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-    }
-    .section-light .risks-list {
-      background: #fff;
-      border-color: rgba(0,0,0,0.05);
-    }
-    .risks-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .risk-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--text-primary);
-    }
-    .risk-check {
-      width: 24px;
-      height: 24px;
-      background: rgba(34, 197, 94, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .risk-check svg {
-      width: 14px;
-      height: 14px;
-      color: #22c55e;
+      border-color: rgba(255, 255, 255, 0.5);
     }
 
     /* Footer */
@@ -861,21 +762,21 @@
   </section>
 
   <!-- Stats Section -->
-  <section class="stats">
+  <section class="stats fade-in">
     <div class="stats-container">
-      <div class="stat-item fade-in">
+      <div class="stat-item fade-in-scale">
         <div class="stat-number">1 000 ₽</div>
         <div class="stat-label">Квартира от / год</div>
       </div>
-      <div class="stat-item fade-in" data-delay="1">
+      <div class="stat-item fade-in-scale" data-delay="1">
         <div class="stat-number">1 000 ₽</div>
         <div class="stat-label">Дом от / год</div>
       </div>
-      <div class="stat-item fade-in" data-delay="2">
+      <div class="stat-item fade-in-scale" data-delay="2">
         <div class="stat-number">2 350 ₽</div>
         <div class="stat-label">Авто от / год</div>
       </div>
-      <div class="stat-item fade-in" data-delay="3">
+      <div class="stat-item fade-in-scale" data-delay="3">
         <div class="stat-number">15 мин</div>
         <div class="stat-label">Время ответа</div>
       </div>
@@ -885,28 +786,28 @@
   <!-- Features Section -->
   <section class="section section-light" id="features">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <p class="section-label">Кому подходит</p>
         <h2 class="section-title">Защита для любого типа имущества</h2>
         <p class="section-subtitle">Подберём оптимальную программу страхования под ваши потребности</p>
       </div>
       <div class="cards-grid">
-        <article class="card fade-in">
+        <article class="card fade-in-left">
           <div class="card-icon">🏢</div>
           <h3 class="card-title">Квартиры</h3>
           <p class="card-text">Покрытие ущерба от падения БПЛА, обломков и последующего пожара. Защита отделки и имущества.</p>
         </article>
-        <article class="card fade-in" data-delay="1">
+        <article class="card fade-in-right" data-delay="1">
           <div class="card-icon">🏠</div>
           <h3 class="card-title">Частные дома</h3>
           <p class="card-text">Полная защита фасада, крыши, инженерных систем и находящегося внутри имущества.</p>
         </article>
-        <article class="card fade-in" data-delay="2">
+        <article class="card fade-in-left" data-delay="2">
           <div class="card-icon">🏬</div>
           <h3 class="card-title">Коммерческая недвижимость</h3>
           <p class="card-text">Офисы, склады, магазины — покрытие рисков простоя бизнеса и повреждений имущества.</p>
         </article>
-        <article class="card fade-in" data-delay="3">
+        <article class="card fade-in-right" data-delay="3">
           <div class="card-icon">🚗</div>
           <h3 class="card-title">Автомобили</h3>
           <p class="card-text">Повреждения кузова, стекол и дорогостоящих деталей после удара беспилотника.</p>
@@ -918,11 +819,11 @@
   <!-- Risks Section -->
   <section class="section">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <p class="section-label">Покрытие</p>
         <h2 class="section-title">Какие риски покрывает страховка</h2>
       </div>
-      <div class="risks-list fade-in">
+      <div class="risks-list fade-in-scale" data-delay="1">
         <div class="risks-grid">
           <div class="risk-item">
             <div class="risk-check">
@@ -968,27 +869,27 @@
   <!-- Advantages Section -->
   <section class="section section-light">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <p class="section-label">Почему мы</p>
         <h2 class="section-title">Преимущества работы с нами</h2>
       </div>
       <div class="cards-grid">
-        <article class="card fade-in">
+        <article class="card fade-in-left">
           <div class="card-icon">✓</div>
           <h3 class="card-title">Официально</h3>
           <p class="card-text">Работаем через лицензированные страховые компании с безупречной репутацией.</p>
         </article>
-        <article class="card fade-in" data-delay="1">
+        <article class="card fade-in-right" data-delay="1">
           <div class="card-icon">⚖</div>
           <h3 class="card-title">Подбор компании</h3>
           <p class="card-text">Подберём лучший продукт и тариф под ваш конкретный случай и бюджет.</p>
         </article>
-        <article class="card fade-in" data-delay="2">
+        <article class="card fade-in-left" data-delay="2">
           <div class="card-icon">📱</div>
           <h3 class="card-title">Удалённо</h3>
           <p class="card-text">Полное оформление и оплата онлайн — без визитов в офис и лишней бюрократии.</p>
         </article>
-        <article class="card fade-in" data-delay="3">
+        <article class="card fade-in-right" data-delay="3">
           <div class="card-icon">🕐</div>
           <h3 class="card-title">Поддержка 24/7</h3>
           <p class="card-text">Помощь в подаче заявления и урегулировании страхового случая в любое время.</p>
@@ -1000,31 +901,31 @@
   <!-- Pricing Section -->
   <section class="section" id="pricing">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <p class="section-label">Тарифы</p>
         <h2 class="section-title">Прозрачная стоимость</h2>
         <p class="section-subtitle">Точный расчёт зависит от характеристик объекта</p>
       </div>
       <div class="pricing-grid">
-        <div class="pricing-card fade-in">
+        <div class="pricing-card fade-in-scale">
           <p class="pricing-type">Страхование</p>
           <h3 class="pricing-title">Квартира</h3>
           <p class="pricing-value">от 1 000 ₽</p>
           <p class="pricing-period">в год</p>
         </div>
-        <div class="pricing-card fade-in" data-delay="1">
+        <div class="pricing-card fade-in-scale" data-delay="1">
           <p class="pricing-type">Страхование</p>
           <h3 class="pricing-title">Дом</h3>
           <p class="pricing-value">от 1 000 ₽</p>
           <p class="pricing-period">в год</p>
         </div>
-        <div class="pricing-card fade-in" data-delay="2">
+        <div class="pricing-card fade-in-scale" data-delay="2">
           <p class="pricing-type">Страхование</p>
           <h3 class="pricing-title">Коммерческая</h3>
           <p class="pricing-value">Индивидуально</p>
           <p class="pricing-period">расчёт</p>
         </div>
-        <div class="pricing-card fade-in" data-delay="3">
+        <div class="pricing-card fade-in-scale" data-delay="3">
           <p class="pricing-type">Страхование</p>
           <h3 class="pricing-title">Автомобиль</h3>
           <p class="pricing-value">от 2 350 ₽</p>
@@ -1039,7 +940,7 @@
     <div class="cta-container">
       <h2 class="cta-title fade-in">Защитите своё имущество сегодня</h2>
       <p class="cta-subtitle fade-in" data-delay="1">Оставьте заявку и получите персональный расчёт стоимости страхования в течение 15 минут</p>
-      <div class="cta-buttons fade-in" data-delay="2">
+      <div class="cta-buttons fade-in-scale" data-delay="2">
         <a href="tel:+79053350109" class="btn-primary">
           Позвонить +7 (905) 335-01-09
         </a>
@@ -1077,9 +978,10 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale').forEach(el => observer.observe(el));
 
     // Form handler
     document.getElementById('leadForm').addEventListener('submit', function(e) {
