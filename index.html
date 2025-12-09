@@ -207,7 +207,7 @@
       overflow: hidden;
       /* Removed blue gradient, kept only dark overlay for the wooden house image */
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
-                  url('images/wooden-house-bg.jpg') center/cover no-repeat;
+                  url('/placeholder.svg?height=1080&width=1920') center/cover no-repeat;
     }
     .hero::before {
       content: '';
@@ -339,41 +339,16 @@
       position: relative;
       z-index: 2;
       box-shadow: var(--shadow-lg);
-      overflow: hidden;
     }
-    /* Improved decorative top bar with animated gradient and glow effect */
     .form-panel::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, 
-        var(--accent-dark) 0%, 
-        var(--accent) 25%, 
-        var(--accent-light) 50%, 
-        var(--accent) 75%, 
-        var(--accent-dark) 100%
-      );
-      background-size: 200% 100%;
-      animation: shimmer 3s ease-in-out infinite;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
       border-radius: var(--radius) var(--radius) 0 0;
-    }
-    .form-panel::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 20px;
-      background: linear-gradient(180deg, var(--accent-subtle) 0%, transparent 100%);
-      pointer-events: none;
-    }
-    @keyframes shimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
     }
     .form-title {
       font-family: 'Playfair Display', serif;
@@ -789,7 +764,7 @@
 
     /* Переработанный футер */
     .footer {
-      background: linear-gradient(135deg, #075985 0%, #0c4a6e 100%);
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
       color: #ffffff;
       padding: 72px 48px 40px;
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -1006,7 +981,12 @@
         <article class="card fade-in-right" data-delay="3">
           <div class="card-icon">🚗</div>
           <h3 class="card-title">Автомобили</h3>
-          <p class="card-text">Повреждения кузова, стекол и дорогостоящих деталей после удара беспилотника.</p>
+          <p class="card-text">
+            Возмещение ущерба от повреждений, нанесенных беспилотными летательными аппаратами (БПЛА). 
+            Также покрытие включает ДТП по вине установленных водителей, даже если у виновника нет ОСАГО или полис поддельный. 
+            ДТП по вине самокатчиков, велосипедистов, пешеходов, снегоходов и других транспортных средств. 
+            Покрытие также распространяется на ДТП по обоюдной вине.
+          </p>
         </article>
       </div>
     </div>
