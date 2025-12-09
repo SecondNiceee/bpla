@@ -695,23 +695,14 @@
 
     /* Переработанная CTA-секция */
     .cta-section {
-      background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      background: var(--bg-light);
       padding: 120px 48px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
     .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(ellipse at 20% 20%, rgba(3, 105, 161, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-      pointer-events: none;
+      display: none;
     }
     .cta-container {
       max-width: 700px;
@@ -725,12 +716,12 @@
       font-weight: 600;
       letter-spacing: -0.03em;
       margin-bottom: 20px;
-      color: #ffffff;
+      color: var(--text-primary);
       line-height: 1.15;
     }
     .cta-subtitle {
       font-size: 18px;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-secondary);
       margin-bottom: 48px;
       line-height: 1.7;
     }
@@ -748,12 +739,12 @@
       box-shadow: 0 20px 50px var(--btn-primary-shadow);
     }
     .cta-buttons .btn-secondary {
-      border-color: rgba(255, 255, 255, 0.4);
-      color: #ffffff;
+      border-color: var(--border-strong);
+      color: var(--text-primary);
     }
     .cta-buttons .btn-secondary:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(0,0,0,0.05);
+      border-color: var(--text-primary);
     }
 
     /* Переработанный футер */
@@ -836,6 +827,8 @@
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
       .nav-links { display: none; }
+      /* Hide logo text on mobile */
+      .nav-logo span { display: none; }
       .hero { padding: 140px 24px 80px; }
       .section { padding: 80px 24px; }
       .stats { padding: 60px 24px; }
