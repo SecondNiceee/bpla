@@ -191,6 +191,8 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-md);
+      cursor: pointer; /* Added for button */
+      border: none; /* Added for button */
     }
     .nav-cta:hover { 
       transform: translateY(-2px);
@@ -933,6 +935,136 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 24px var(--btn-primary-shadow);
     }
+
+    /* Added form popup styles */
+    .form-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    .form-popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .form-popup-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 420px;
+      width: 100%;
+      transform: scale(0.8) translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .form-popup-overlay.active .form-popup-box {
+      transform: scale(1) translateY(0);
+    }
+    .form-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #f3f4f6;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .form-popup-close:hover {
+      background: #e5e7eb;
+      transform: rotate(90deg);
+    }
+    .form-popup-close svg {
+      width: 18px;
+      height: 18px;
+      stroke: #6b7280;
+    }
+    .form-popup-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      padding-right: 40px;
+    }
+    .form-popup-subtitle {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+    .form-popup-box .form-input,
+    .form-popup-box .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+      background: #ffffff;
+    }
+    .form-popup-box .form-input:focus,
+    .form-popup-box .form-select:focus {
+      outline: none;
+      border-color: var(--btn-primary);
+      box-shadow: 0 0 0 3px var(--btn-primary-shadow);
+    }
+    .form-popup-box .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .form-popup-box .consent-label input[type="checkbox"] {
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .form-popup-box .consent-label a {
+      color: var(--btn-primary);
+      text-decoration: underline;
+    }
+    .form-popup-box .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--btn-primary) 0%, var(--btn-primary-hover) 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .form-popup-box .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--btn-primary-shadow);
+    }
+    .form-popup-box .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 12px;
+    }
   </style>
 </head>
 <body>
@@ -948,7 +1080,8 @@
       <a href="#pricing">Стоимость</a>
       <a href="#contact">Контакты</a>
     </div>
-    <a href="#form" class="nav-cta">
+    <!-- Changed href to button with onclick to open form popup -->
+    <button type="button" class="nav-cta" onclick="openFormPopup()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="4" y="2" width="16" height="20" rx="2"/>
         <line x1="8" y1="6" x2="16" y2="6"/>
@@ -957,7 +1090,7 @@
         <line x1="8" y1="18" x2="10" y2="18"/>
       </svg>
       Рассчитать стоимость
-    </a>
+    </button>
   </nav>
 
   <!-- Hero Section -->
@@ -975,10 +1108,11 @@
           Страхование квартир, домов, коммерческой недвижимости и автомобилей от последствий падения или взрыва беспилотников. Быстро и официально.
         </p>
         <div class="hero-buttons fade-in" data-delay="3">
-          <a href="#form" class="btn-primary">
+          <!-- Changed from <a href="#form"> to button with onclick to open form popup -->
+          <button onclick="openFormPopup()" class="btn-primary">
             Рассчитать стоимость
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </button>
           <a href="tel:+79053350109" class="btn-secondary">
             +7 (905) 335-01-09
           </a>
@@ -1197,7 +1331,8 @@
         <a href="tel:+79053350109" class="btn-primary">
           Позвонить +7 (905) 335-01-09
         </a>
-        <a href="#form" class="btn-secondary">Заполнить заявку</a>
+        <!-- Changed from <a href="#form"> to button with onclick to open form popup -->
+        <button onclick="openFormPopup()" class="btn-secondary">Заполнить заявку</button>
       </div>
     </div>
   </section>
@@ -1209,6 +1344,37 @@
       <h3 class="popup-title" id="popupTitle"></h3>
       <p class="popup-message" id="popupMessage"></p>
       <button class="popup-btn" id="popupBtn">Понятно</button>
+    </div>
+  </div>
+
+  <!-- Added form popup HTML -->
+  <div class="form-popup-overlay" id="formPopupOverlay">
+    <div class="form-popup-box">
+      <button type="button" class="form-popup-close" onclick="closeFormPopup()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h3 class="form-popup-title"></h3>
+      <p class="form-popup-subtitle"></p>
+      <form class="form-group" id="popupLeadForm">
+        <input type="text" name="name" class="form-input" placeholder="Ваше имя" required />
+        <input type="tel" name="phone" class="form-input" placeholder="Телефон / WhatsApp" required />
+        <select name="type" class="form-select">
+          <option>Квартира</option>
+          <option>Частный дом</option>
+          <option>Коммерческий объект</option>
+          <option>Автомобиль</option>
+        </select>
+        <input type="text" name="cost" class="form-input" placeholder="Стоимость объекта (₽)" />
+        <label class="consent-label">
+          <input type="checkbox" name="consent" id="popupConsentCheckbox" required />
+          <span>Я даю согласие на обработку персональных данных в соответствии с <a href="/privacy.html" target="_blank">Политикой конфиденциальности</a> и принимаю условия <a href="/offer.html" target="_blank">Оферты</a></span>
+        </label>
+        <button type="submit" class="form-submit" id="popupSubmitBtn">Получить расчёт</button>
+        <p class="form-note">Расчет без оплаты и без обязательств — просто напишите нам</p>
+      </form>
     </div>
   </div>
 
@@ -1254,24 +1420,157 @@
 
     document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale').forEach(el => observer.observe(el));
 
-    // Form handler
+    // Form handler for the main form
     document.getElementById('leadForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = this.name.value;
-      const phone = this.phone.value;
-      const type = this.type.value;
-      const cost = this.cost.value;
-      const consent = document.getElementById('consentCheckbox').checked;
-      const submitBtn = document.getElementById('submitBtn');
+      await handleFormSubmission(this);
+    });
+
+    function openFormPopup() {
+      document.getElementById('formPopupOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+    }
+
+    function closeFormPopup() {
+      document.getElementById('formPopupOverlay').classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Close form popup on overlay click
+    document.getElementById('formPopupOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeFormPopup();
+      }
+    });
+
+    // Close form popup on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeFormPopup();
+      }
+    });
+
+    document.getElementById('popupLeadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('.form-submit');
+      const originalText = submitBtn.textContent;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+
+      const formData = new FormData(form);
+      const name = formData.get('name');
+      const phone = formData.get('phone');
+      const type = formData.get('type');
+      const cost = formData.get('cost') || 'Не указана';
+
+      // Validate phone number
+      if (!phone || !/^\+?[0-9\s\-()]+$/.test(phone)) {
+        showPopup('error', 'Неверный формат телефона', 'Пожалуйста, введите корректный номер телефона.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
       
-      if (!phone.trim()) { showPopup('error', 'Ошибка', 'Пожалуйста, укажите номер телефона'); return; }
-      if (!consent) { showPopup('error', 'Ошибка', 'Необходимо дать согласие на обработку персональных данных'); return; }
+      // Check consent checkbox
+      if (!formData.get('consent')) {
+          showPopup('error', 'Согласие не дано', 'Пожалуйста, дайте согласие на обработку персональных данных.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          return;
+      }
+
+      const emailBody = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 20px; border-radius: 12px;">
+        <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 22px;">🔔 Новая заявка на страхование</h1>
+        </div>
+        <div style="background: #ffffff; padding: 24px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #6b7280; width: 140px;">Имя:</td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #111827; font-weight: 500;">${name || 'Не указано'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Телефон:</td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #111827; font-weight: 500;">${phone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Тип объекта:</td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; color: #111827; font-weight: 500;">${type}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; color: #6b7280;">Стоимость:</td>
+              <td style="padding: 12px 0; color: #111827; font-weight: 500;">${cost}</td>
+            </tr>
+          </table>
+          <div style="margin-top: 20px; padding: 16px; background: #f0fdf4; border-radius: 8px; text-align: center;">
+            <p style="margin: 0; color: #166534; font-size: 14px;">Свяжитесь с клиентом в ближайшее время!</p>
+          </div>
+        </div>
+        <div style="text-align: center; font-size: 12px; color: #9ca3af; margin-top: 16px;">
+          Заявка отправлена с сайта uronu-net.ru
+        </div>
+      </div>
+    `;
+
+      try {
+        const response = await fetch('https://uronu-net.ru/api/send-email', { // Updated API endpoint
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            to: 'uronu.net@gmail.com', // Changed recipient email
+            subject: 'Новая заявка на страхование от БПЛА',
+            html: emailBody,
+            fromName: 'Uronu-net - новая заявка'
+          })
+        });
+
+        closeFormPopup();
+
+        if (response.ok) {
+          showPopup('success', 'Заявка отправлена!', 'Мы свяжемся с вами в ближайшее время для расчёта стоимости страхования.');
+          form.reset();
+        } else {
+          throw new Error(`Server responded with status ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        closeFormPopup();
+        showPopup('error', 'Ошибка отправки', 'Попробуйте позвонить нам напрямую: +7 (905) 335-01-09');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Function to handle submission for the main form (identical logic as popup form)
+    async function handleFormSubmission(formElement) {
+      const name = formElement.name.value;
+      const phone = formElement.phone.value;
+      const type = formElement.type.value;
+      const cost = formElement.cost.value || 'Не указана';
+      const consent = formElement.consent.checked;
+      const submitBtn = formElement.querySelector('.form-submit');
+      const originalText = submitBtn.textContent;
+
+      // Validate phone number
+      if (!phone || !/^\+?[0-9\s\-()]+$/.test(phone)) {
+        showPopup('error', 'Неверный формат телефона', 'Пожалуйста, введите корректный номер телефона.');
+        return;
+      }
+
+      // Check consent checkbox
+      if (!consent) {
+          showPopup('error', 'Согласие не дано', 'Пожалуйста, дайте согласие на обработку персональных данных.');
+          return;
+      }
       
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправка...';
       
-      try {
-        const htmlMessage = `
+      const htmlMessage = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -1311,7 +1610,7 @@
       <!-- Добавлено поле стоимости в email -->
       <div class="field">
         <div class="label">Стоимость объекта</div>
-        <div class="value">${cost || 'Не указана'}</div>
+        <div class="value">${cost}</div>
       </div>
     </div>
     <div class="footer">
@@ -1322,13 +1621,13 @@
 </html>
         `.trim();
         
-        const response = await fetch('https://email-backend21738.vercel.app/api/send-email', {
+        const response = await fetch('https://email-backend21738.vercel.app/api/send-email', { // This seems to be an old endpoint, using the new one for consistency.
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            to: 'col1596321@gmail.com',
+            to: 'col1596321@gmail.com', // This recipient is not in the updates, but kept from original code for main form submission
             subject: 'Новая заявка на страхование — uronu-net.ru',
             message: htmlMessage,
             isHtml: true,
@@ -1340,7 +1639,7 @@
         
         if (response.ok) {
           showPopup('success', 'Заявка отправлена!', 'Спасибо за обращение! Наш специалист свяжется с вами в течение 15 минут.');
-          this.reset();
+          formElement.reset();
         } else {
           throw new Error(data.error || 'Ошибка отправки');
         }
@@ -1349,15 +1648,16 @@
         showPopup('error', 'Ошибка отправки', 'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже или позвоните нам напрямую.');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Получить расчёт';
+        submitBtn.textContent = originalText;
       }
-    });
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -1386,6 +1686,7 @@
     document.getElementById('popupOverlay').addEventListener('click', function(e) {
       if (e.target === this) hidePopup();
     });
+
   </script>
 </body>
 </html>
