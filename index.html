@@ -205,9 +205,9 @@
       padding: 160px 48px 100px;
       position: relative;
       overflow: hidden;
-      /* Removed blue gradient, kept only dark overlay for the wooden house image */
+      /* Fixed background image path to use actual uploaded image */
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
-                  url('/placeholder.svg?height=1080&width=1920') center/cover no-repeat;
+                  url('images/modern-city-house.jpg') center/cover no-repeat;
     }
     .hero::before {
       content: '';
@@ -340,15 +340,9 @@
       z-index: 2;
       box-shadow: var(--shadow-lg);
     }
+    /* Removed blue top bar from form panel */
     .form-panel::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
-      border-radius: var(--radius) var(--radius) 0 0;
+      display: none;
     }
     .form-title {
       font-family: 'Playfair Display', serif;
@@ -764,10 +758,10 @@
 
     /* Переработанный футер */
     .footer {
-      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-      color: #ffffff;
+      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: var(--text-primary);
       padding: 72px 48px 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid var(--border);
     }
     .footer-container {
       max-width: 1200px;
@@ -783,7 +777,8 @@
       align-items: center;
       gap: 14px;
       text-decoration: none;
-      color: #ffffff;
+      /* Changed text color for light background */
+      color: var(--text-primary);
       font-weight: 700;
       font-size: 17px;
       letter-spacing: -0.02em;
@@ -796,18 +791,20 @@
       gap: 32px;
     }
     .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
+      /* Changed link color for light background */
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       transition: color 0.2s ease;
     }
     .footer-links a:hover {
-      color: #ffffff;
+      color: var(--accent);
     }
     .footer-contact {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.7);
+      /* Changed text color for light background */
+      color: var(--text-secondary);
     }
     .footer-contact a {
       color: var(--btn-primary);
@@ -821,10 +818,11 @@
       max-width: 1200px;
       margin: 48px auto 0;
       padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.12);
+      /* Changed border color for light background */
+      border-top: 1px solid var(--border);
       text-align: center;
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(0,0,0,0.5);
     }
 
     /* Обновленные медиа-запросы */
