@@ -1356,8 +1356,8 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-      <h3 class="form-popup-title"></h3>
-      <p class="form-popup-subtitle"></p>
+      <h3 class="form-popup-title">Узнать стоимость</h3>
+      <p class="form-popup-subtitle">Получите расчёт за 1 минуту</p>
       <form class="form-group" id="popupLeadForm">
         <input type="text" name="name" class="form-input" placeholder="Ваше имя" required />
         <input type="tel" name="phone" class="form-input" placeholder="Телефон / WhatsApp" required />
@@ -1416,9 +1416,22 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+    }, { threshold: 0.05, rootMargin: '50px 0px 0px 0px' });
 
-    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale').forEach(el => observer.observe(el));
+    // Select all animated elements
+    const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale');
+    
+    // Immediately show elements that are already in viewport (like hero section)
+    animatedElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Element is already visible in viewport, add visible class immediately
+        el.classList.add('visible');
+      } else {
+        // Element is not visible, observe it
+        observer.observe(el);
+      }
+    });
 
     // Form handler for the main form
     document.getElementById('leadForm').addEventListener('submit', async function(e) {
