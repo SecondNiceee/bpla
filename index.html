@@ -205,7 +205,9 @@
       padding: 160px 48px 100px;
       position: relative;
       overflow: hidden;
-      background: var(--bg-primary);
+      /* Removed blue gradient, kept only dark overlay for the wooden house image */
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+                  url('images/wooden-house-bg.jpg') center/cover no-repeat;
     }
     .hero::before {
       content: '';
@@ -214,7 +216,7 @@
       right: -200px;
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, var(--accent-subtle) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero::after {
@@ -224,7 +226,7 @@
       left: -200px;
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.04) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-container {
@@ -241,15 +243,16 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
+      /* Updated badge background for contrast on dark background */
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       padding: 10px 20px;
       border-radius: 100px;
       font-size: 13px;
       font-weight: 500;
       color: var(--text-secondary);
       margin-bottom: 32px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow-md);
     }
     .hero-badge-dot {
       width: 8px;
@@ -270,11 +273,13 @@
       line-height: 1.08;
       margin-bottom: 28px;
       letter-spacing: -0.03em;
-      color: var(--text-primary);
+      /* Updated title color for contrast on dark background */
+      color: #ffffff;
     }
     .hero-subtitle {
       font-size: 18px;
-      color: var(--text-secondary);
+      /* Updated subtitle color for contrast on dark background */
+      color: rgba(255, 255, 255, 0.85);
       max-width: 480px;
       margin-bottom: 44px;
       line-height: 1.75;
@@ -307,19 +312,21 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: transparent;
-      color: var(--accent);
+      /* Updated secondary button for better contrast on dark background */
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
       padding: 18px 36px;
       border-radius: 100px;
       font-weight: 600;
       font-size: 15px;
       text-decoration: none;
-      border: 1.5px solid var(--accent);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
       transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
     }
     .btn-secondary:hover {
-      background: var(--accent-subtle);
-      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
       box-shadow: var(--shadow-sm);
     }
 
@@ -332,16 +339,41 @@
       position: relative;
       z-index: 2;
       box-shadow: var(--shadow-lg);
+      overflow: hidden;
     }
+    /* Improved decorative top bar with animated gradient and glow effect */
     .form-panel::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      height: 5px;
+      background: linear-gradient(90deg, 
+        var(--accent-dark) 0%, 
+        var(--accent) 25%, 
+        var(--accent-light) 50%, 
+        var(--accent) 75%, 
+        var(--accent-dark) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
       border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .form-panel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 20px;
+      background: linear-gradient(180deg, var(--accent-subtle) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     .form-title {
       font-family: 'Playfair Display', serif;
